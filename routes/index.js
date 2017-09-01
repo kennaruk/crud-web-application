@@ -58,11 +58,17 @@ router.get('/layout', function(req, res, next) {
   res.render('layout.ejs', { title: title, items: items });
 });
 
-//API DATABASE REFERENCES
 router.delete('/delete', function(req, res, next) {
   var item_id = req.body.item_id;
-  console.log('call delete item by id api.\nitem_id: '+item_id);
-  res.render('item_table.ejs', {title: title, columns: columns, items: []});
+  db.deleteItemById(item_id, err => {
+    if(!err)
+      db.getItems(results => {
+        res.render('item_table.ejs', {title: title, columns: columns, items: results})
+      });
+    else
+      res.json({err: err});
+  });
+  ;
 });
 
 
@@ -77,19 +83,24 @@ router.post('/edit', function(req, res, next) {
  db.updateItem(payload, err => {
    if(!err)
      res.redirect('/');
-   else 
+   else
      res.json({err: err});
  });
 });
 
 router.post('/add', function(req, res, next) {
-  var item_id = req.body.item_id;
-  var item_name = req.body.item_name;
-  var item_picture = req.body.item_picture;
-  var item_price = req.body.price;
-  var item_stock = req.body.stock;
-  console.log('call add item api.');
-  res.json({});
+  var payload = {
+    item_name : req.body.item_name,
+    item_picture : req.body.item_picture,
+    item_price : req.body.item_price,
+    item_stock : req.body.item_stock
+  }
+  db.insertItem(payload, err => {
+    if(!err)
+      res.redirect('/');
+    else
+      res.json({err: err});
+  });
 });
 
 router.get('/fetch', function(req, res, next) {

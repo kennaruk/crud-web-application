@@ -77,3 +77,27 @@ exports.updateItem = (payload, callback) => {
       callback(err);
     });
 }
+
+exports.insertItem = (payload, callback) => {
+  var execute = ("INSERT INTO items (item_name, item_picture, item_price, item_stock) \
+  VALUES ('"+payload.item_name+"', '"+payload.item_picture+"', "+payload.item_price+", "+payload.item_stock+") \
+  ;")
+  console.log(execute);
+  connection.query(execute,
+    (err, results, fields) => {
+      if(err)
+        console.log('Insert Item Error.');
+      callback(err);
+    });
+}
+
+exports.deleteItemById = (item_id, callback) => {
+  var execute = "DELETE FROM items WHERE item_id = "+item_id;
+  console.log(execute);
+  connection.query(execute,
+    (err, results, fields) => {
+      if(err)
+        console.log('Delete Item By Id Error.');
+      callback(err);
+    });
+}
