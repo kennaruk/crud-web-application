@@ -14,21 +14,21 @@
             <div class="row-fluid">
                 <form class="well" method="post" action="/edit">
 
-                    <input type="hidden" name="item_id" value="{{results._id}}">
+                    <input type="hidden" name="item_id" value="<%=item.item_id%>">
                     <label>Name</label>
-                    <input type="text" class="span6" placeholder="Item Name" name="item_name" value="{{results.first_name}}">
+                    <input type="text" class="span6" placeholder="Item Name" name="item_name" value="<%=item.item_name%>">
 
                     <label>Item Picture (URL)</label>
-                    <input type="text" class="span6" placeholder="URL Ex. www.google.co.th" name="item_picture" value="{{results.last_name}}">
+                    <input type="text" class="span6" placeholder="URL Ex. www.google.co.th" name="item_picture" value="<%=item.item_picture%>">
 
                     <label>Item Price (BAHT)</label>
-                    <input type="text" class="span1" placeholder="Ex. 40" name="item_price" value="{{results.last_name}}">
+                    <input type="text" class="span1" placeholder="Ex. 40" name="item_price" value="<%=item.item_price%>">
 
                     <label>Item Stock (Unit)</label>
-                    <input type="text" class="span1" placeholder="Ex. 10" name="item_stock" value="{{results.last_name}}">
+                    <input type="text" class="span1" placeholder="Ex. 10" name="item_stock" value="<%=item.item_stock%>">
 
                     <%# <label>Email</label>
-                    <input type="text" class="span4" placeholder="email@email.com" name="email" value="{{results.email}}">%>
+                    <input type="text" class="span4" placeholder="email@email.com" name="email" value="">%>
 
                     <button type="submit" class="btn">Submit</button>
                 </form>
