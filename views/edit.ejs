@@ -14,15 +14,21 @@
             <div class="row-fluid">
                 <form class="well" method="post" action="/edit">
 
-                    <input type="hidden" name="id" value="{{results._id}}">
+                    <input type="hidden" name="item_id" value="{{results._id}}">
                     <label>Name</label>
-                    <input type="text" class="span6" placeholder="Your First Name" name="first_name" value="{{results.first_name}}">
+                    <input type="text" class="span6" placeholder="Item Name" name="item_name" value="{{results.first_name}}">
 
-                    <label>Last Name</label>
-                    <input type="text" class="span6" placeholder="Your Last Name" name="last_name" value="{{results.last_name}}">
+                    <label>Item Picture (URL)</label>
+                    <input type="text" class="span6" placeholder="URL Ex. www.google.co.th" name="item_picture" value="{{results.last_name}}">
 
-                    <label>Email</label>
-                    <input type="text" class="span4" placeholder="email@email.com" name="email" value="{{results.email}}">
+                    <label>Item Price (BAHT)</label>
+                    <input type="text" class="span1" placeholder="Ex. 40" name="item_price" value="{{results.last_name}}">
+
+                    <label>Item Stock (Unit)</label>
+                    <input type="text" class="span1" placeholder="Ex. 10" name="item_stock" value="{{results.last_name}}">
+
+                    <%# <label>Email</label>
+                    <input type="text" class="span4" placeholder="email@email.com" name="email" value="{{results.email}}">%>
 
                     <button type="submit" class="btn">Submit</button>
                 </form>

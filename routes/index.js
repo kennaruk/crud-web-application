@@ -10,6 +10,45 @@ var columns = [
   'Action'
 ]
 
+var columnn = [
+  {
+    "name": "ID",
+    "type": "text",
+    "key": "item_id",
+    "placholder": "Item ID"
+  },
+  {
+    "name": "Name",
+    "type": "text",
+    "key": "item_name",
+    "placholder": "Item Name"
+  },
+  {
+    "name": "Picture",
+    "type": "text",
+    "key": "item_picture",
+    "placholder": "Item Picture URL"
+  },
+  {
+    "name": "Price",
+    "type": "text",
+    "key": "item_price",
+    "placholder": "Item Price"
+  },
+  {
+    "name": "Stock",
+    "type": "text",
+    "key": "item_stock",
+    "placholder": "Item Stock Left"
+  },
+  {
+    "name": "Action",
+    "type": "bootstrap-button",
+    "key": "ActionButton",
+    "placholder": "ItemButton"
+  }
+]
+
 var items = [
   {
     "item_id": 1,
@@ -58,7 +97,7 @@ router.get('/layout', function(req, res, next) {
 router.delete('/delete', function(req, res, next) {
   var item_id = req.body.item_id;
   console.log('call delete item by id api.\nitem_id: '+item_id);
-  res.render('item_table.ejs', {title: title, items: []});
+  res.render('item_table.ejs', {title: title, columns: columns, items: []});
 });
 
 
