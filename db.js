@@ -101,3 +101,18 @@ exports.deleteItemById = (item_id, callback) => {
       callback(err);
     });
 }
+
+exports.login = (username, password, callback) => {
+  var execute = "SELECT * FROM users WHERE user_name = '"+username+"' AND user_password = '"+password+"';";
+  console.log(execute);
+  connection.query(execute,
+    (err, results, fields) => {
+      console.log('results: ', results);
+      if(err)
+        console.log('login Error.');
+      if(results === undefined)
+        callback(false);
+      else
+        callback(results.length === 1);
+    });
+}

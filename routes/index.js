@@ -1,6 +1,21 @@
 var express = require('express');
+var session = require('express-session')
 var router = express.Router();
 var db = require('../db.js');
+
+router.use(session({
+    secret: '2C44-4D44-WppQ38S5',
+    resave: true,
+    saveUninitialized: true
+}));
+
+var auth = function(req, res, next) {
+    if(req.session.admin)
+      return next();
+    else
+      res.render('login.ejs');
+}
+
 var columns = [
   'ID',
   'Name',
@@ -37,25 +52,25 @@ var users = [
 var title = "Items Stock | CRUD Web Application"
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
   db.getItems(results => {
-    res.render('index.ejs', { title: title, columns: columns, items: results });
+    res.render('index.ejs', { title: title, columns: columns, items: results, username: req.session.username });
   });
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('add.ejs', { title: title, columns: columns, items: items });
+  res.render('add.ejs', { title: title, columns: columns, items: items, username: req.session.username });
 });
 
 router.get('/edit/:item_id', function(req, res, next) {
   var item_id = req.params.item_id;
   db.getItemById(item_id, results => {
-    res.render('edit.ejs', { title: title, item: results[0] });
+    res.render('edit.ejs', { title: title, item: results[0], username: req.session.username });
   });
 });
 
 router.get('/layout', function(req, res, next) {
-  res.render('layout.ejs', { title: title, items: items });
+  res.render('layout.ejs', { title: title, items: items, username: req.session.username });
 });
 
 router.delete('/delete', function(req, res, next) {
@@ -63,7 +78,7 @@ router.delete('/delete', function(req, res, next) {
   db.deleteItemById(item_id, err => {
     if(!err)
       db.getItems(results => {
-        res.render('item_table.ejs', {title: title, columns: columns, items: results})
+        res.render('item_table.ejs', {title: title, columns: columns, items: results, username: req.session.username})
       });
     else
       res.json({err: err});
@@ -112,4 +127,20 @@ router.get('/fetch', function(req, res, next) {
   });
 });
 
+router.post('/login', function(req, res, next) {
+  var username = req.body.username;
+  var password = req.body.password;
+  db.login(username, password, (success) => {
+    if(success) {
+      req.session.admin = true;
+      req.session.username = username;
+    }
+    res.redirect('/');
+  });
+});
+
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  res.redirect('/');
+});
 module.exports = router;

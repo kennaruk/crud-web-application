@@ -15,6 +15,7 @@
     "serve-favicon": "~2.4.2",
     "ejs": "*",
     "mysql": "*",
-    "aws-sdk": "*"
+    "aws-sdk": "*",
+    "express-session": "*"
   }
 }
