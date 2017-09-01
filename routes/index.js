@@ -1,6 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+var columns = [
+  'ID',
+  'Name',
+  'Picture',
+  'Price',
+  'Stock',
+  'Action'
+]
+
 var items = [
   {
     "item_id": 1,
@@ -29,27 +38,27 @@ var title = "Items Stock | CRUD Web Application"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index.ejs', { title: title, items: items, users: users });
+  res.render('index.ejs', { title: title, columns: columns, items: items, users: users });
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('add.ejs', { title: title, items: items, users: users });
+  res.render('add.ejs', { title: title, columns: columns, items: items, users: users });
 });
 
 router.get('/edit/:item_id', function(req, res, next) {
   var item_id = req.params.item_id;
-  res.render('edit.ejs', { title: title, items: items, users: users });
+  res.render('edit.ejs', { title: title, columns: columns, items: items, users: users });
 });
 
 router.get('/layout', function(req, res, next) {
-  res.render('layout.ejs', { title: title, items: items, users: users });
+  res.render('layout.ejs', { title: title, columns: columns, items: items, users: users });
 });
 
 //API DATABASE REFERENCES
 router.delete('/delete', function(req, res, next) {
   var item_id = req.body.item_id;
-  console.log('call delete item by id api.');
-  res.json({});
+  console.log('call delete item by id api.\nitem_id: '+item_id);
+  res.render('item_table.ejs', {title: title, items: []});
 });
 
 
