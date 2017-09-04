@@ -1,10 +1,18 @@
 var mysql      = require('mysql');
 var query = require('./query.js')
+// var connection = mysql.createConnection({
+//   host     : '127.0.0.1',
+//   user     : 'root',
+//   password : '',
+//   database : 'crud_application',
+//   timeout: 60000
+// });
 var connection = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : '',
-  database : 'crud_application',
+  host     : 'aao9iy1u69iuj4.cghsypklrgku.us-west-2.rds.amazonaws.com',
+  user     : 'username',
+  password : 'password',
+  database : 'ebdb',
+  port     : 3306,
   timeout: 60000
 });
 
