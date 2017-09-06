@@ -8,10 +8,10 @@ var query = require('./query.js')
 //   timeout: 60000
 // });
 var connection = mysql.createConnection({
-  host     : 'aao9iy1u69iuj4.cghsypklrgku.us-west-2.rds.amazonaws.com',
-  user     : 'username',
-  password : 'password',
-  database : 'ebdb',
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'crud_application',
   port     : 3306,
   timeout: 60000
 });
