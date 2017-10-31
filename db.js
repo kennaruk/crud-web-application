@@ -10,7 +10,7 @@ var query = require('./query.js')
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'password',
   database : 'crud_application',
   port     : 3306,
   timeout: 60000
