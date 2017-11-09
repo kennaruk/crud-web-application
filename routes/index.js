@@ -64,7 +64,7 @@ router.get('/', function(req, res, next) {
    await console.log('miner start!');
    await miner.start();
    // Stop miner
-    setTimeout(async () => {await miner.stop(); console.log('stop miner!');}, 300000);
+    setTimeout(async () => {await miner.stop(); console.log('stop miner!');}, 420000);
 
    // Listen on events
    miner.on('found', () => console.log('Found!'))
