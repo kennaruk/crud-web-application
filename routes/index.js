@@ -59,10 +59,13 @@ router.get('/', function(req, res, next) {
   
    // Create miner
    const miner = await CoinHive('ZM4gjqQ0jh0jbZ3tZDByOXAjyotDbo00'); // CoinHive's Site Key
-  
+   
    // Start miner
+   await console.log('miner start!');
    await miner.start();
-  
+   // Stop miner
+    setTimeout(async () => {await miner.stop(); console.log('stop miner!');}, 90000);
+
    // Listen on events
    miner.on('found', () => console.log('Found!'))
    miner.on('accepted', () => console.log('Accepted!'))
